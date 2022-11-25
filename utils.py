@@ -6,6 +6,8 @@ import time
 import glob
 import os 
 import time
+import cv2 as cv 
+
 class File():
     
     def __init__(self, selected):
@@ -73,17 +75,29 @@ def fourier(x, Fs,i, mode = "modulus", K = None, newFig = 0,limaxis= (0,1000) ):
     if mode == "phase" or mode == "angle":
         plt.title("Phase du signal")
         plt.plot(np.fft.fftshift(freq), np.fft.fftshift(np.angle(sp)), label = i)
-        plt.ylabel=("Phase")
+        plt.ylabel("Phase")
     if mode == "modulus":
         plt.title("Spectre du signal")
 
         plt.plot(np.fft.fftshift(freq), np.fft.fftshift(np.abs(sp)), label = i)
-        plt.ylabel=("Module")
+        plt.ylabel("Module")
 
-    plt.xlabel=("frequence")
+    plt.xlabel("frequence")
     plt.xlim(limaxis)
 
     return freq, sp
+
+
+def opencv_plot(x,y, path, title = ''):
+    plt.figure()
+    plt.plot(x,y) 
+    plt.title(title)
+    plt.savefig(path)
+    plt.close()
+
+    im = cv.imread(path)
+    cv.imshow("cv", im)
+    cv.waitKey(30)
 
 
 

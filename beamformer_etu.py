@@ -1,6 +1,8 @@
 import numpy as np #line:1
 N =8 #line:4
 d =0.06 #line:5
+# j'ai modifié le nom des variables pour vor si j'avais bien compris
+
 def beam_filter (freq_vector ,N ,d ,theta =0 ,mic_id :int =0 ):#line:7
     ""#line:19
     z =(mic_id -N -1 )/2 *d #line:22
@@ -14,6 +16,8 @@ def beamformer (buffer ,theta ,F0 ,Fs ):#line:27
     v2 =np .zeros ((N ,1 ),dtype =np .complex )#line:49
     Y_th =np .zeros ((len (theta ),1 ),dtype =np .complex_ )#line:50
     Mfft =np .fft .fft (buffer )#line:53
+    
+    # J'ai repris cette idée pour trouver k0 qui était bien plus propre et fiable que ma façon de faire 
     k0 =np .abs (Freq -F0 ).argmin ()#line:57
     Fk0 =Freq [k0 ]#line:60
     M =Mfft [:,k0 ]#line:61
